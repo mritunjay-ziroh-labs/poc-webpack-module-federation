@@ -10,9 +10,13 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
+import LeftSideBar from "./modules/LeftSideBar";
+
 const CounterAppOne = React.lazy(() => import("app1/CounterAppOne"));
 const CounterAppTwo = React.lazy(() => import("app2/CounterAppTwo"));
+// const LeftSideBar = React.lazy(() => import("leftSideBar/leftSideBar"));
 const version = "";
+
 const App = () => (
   <>
     <Center
@@ -62,7 +66,8 @@ const App = () => (
               <Heading color="#6F60EA" mb="1rem">
                 APP-2
               </Heading>
-              <CounterAppTwo />
+              {/* <CounterAppTwo /> */}
+              <LeftSideBar />
             </Box>
           </React.Suspense>
         </Flex>

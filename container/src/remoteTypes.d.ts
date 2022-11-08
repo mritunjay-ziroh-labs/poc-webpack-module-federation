@@ -11,3 +11,9 @@ declare module "app2/CounterAppTwo" {
 
   export default CounterAppTwo;
 }
+
+declare module "leftSideBar/leftSideBar" {
+  const LeftSideBar: React.ComponentType;
+
+  export default LeftSideBar;
+}
