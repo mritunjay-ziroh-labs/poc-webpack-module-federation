@@ -10,12 +10,30 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import React from "react";
-
+import { ErrorBoundary } from "react-error-boundary";
 const CounterAppOne = React.lazy(() => import("app1/CounterAppOne"));
 const CounterAppTwo = React.lazy(() => import("app2/CounterAppTwo"));
 const LeftSideBar = React.lazy(() => import("./modules/LeftSideBar"));
 
-const version = "";
+function ErrorFallback() {
+  return (
+    <Flex
+      justifyContent="space-between"
+      alignItems="center"
+      flexDirection="column"
+    >
+      <Box
+        p="2rem"
+        mr="2rem"
+        border="1px solid #aeaeae"
+        borderRadius="1rem"
+        backgroundColor="#fff"
+      >
+        <Spinner />
+      </Box>
+    </Flex>
+  );
+}
 
 const App = () => (
   <>
@@ -37,10 +55,13 @@ const App = () => (
         padding="5rem"
         backgroundColor="#6F60EA"
       >
-        <Heading color="#fff" m={4}>CONTAINER APP</Heading>
+        <Heading color="#fff" m={4}>
+          CONTAINER APP
+        </Heading>
 
         <Flex direction="row" justifyContent="space-between" width="80vw">
-          <React.Suspense fallback={<Spinner size="xl" />}>
+          {/* <React.Suspense fallback={<p>Loading...</p>}> */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Box
               p="2rem"
               mr="2rem"
@@ -53,9 +74,10 @@ const App = () => (
               </Heading>
               <CounterAppOne />
             </Box>
-          </React.Suspense>
-          <Spacer />
-          <React.Suspense fallback={<Spinner size="xl" />}>
+          </ErrorBoundary>
+          {/* </React.Suspense> */}
+          {/* <React.Suspense fallback={<p>Loading...</p>}> */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Box
               p="2rem"
               border="1px solid #aeaeae"
@@ -67,9 +89,10 @@ const App = () => (
               </Heading>
               <CounterAppTwo />
             </Box>
-          </React.Suspense>
-          <Spacer />
-          <React.Suspense fallback={<Spinner size="xl" />}>
+          </ErrorBoundary>
+          {/* </React.Suspense> */}
+          {/* <React.Suspense fallback={<p>Loading...</p>}> */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Box
               p="2rem"
               border="1px solid #aeaeae"
@@ -81,7 +104,8 @@ const App = () => (
               </Heading>
               <LeftSideBar />
             </Box>
-          </React.Suspense>
+          </ErrorBoundary>
+          {/* </React.Suspense> */}
         </Flex>
       </Flex>
     </Center>
